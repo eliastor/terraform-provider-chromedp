@@ -42,12 +42,12 @@ provider_installation {
 ```
 
 
-To generate or update documentation, run `go generate`.
+To generate or update documentation, run `go generate` or `make doc-gen`.
 
-In order to run the full suite of Acceptance tests, run `make testacc`.
+In order to run the full suite of Acceptance tests, run `make test`.
 
 ```shell
-make testacc
+make test
 ```
 
 
