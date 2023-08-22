@@ -41,10 +41,37 @@ data "chromedp_recipe" "example" {
 
 - `actions` (List of List of String) List of Actions. Each action is a list of arguments (strings).
 Supported actions:
-	- **navigate**: navigates the current frame.
-	- **click**:
-	- **value**:
-	- **text**:
+	- **navigate**: navigates the current frame to specific URL.
+	
+		> ["navigate", "https://github.com/eliastor/terraform-provider-chromedp"]
+	
+	- **click**: sends a mouse click event to the first element node matching the selector. Last argument "visible" waits for all queried elements are visible. 
+	
+		> ["click", "#example-After", "visible"]
+	
+	- **value**: gets value of form, input, textarea, select, or any other element with a ".value" field. Last argument places caught value into "values" attribute under specified key
+	
+		> ["value", "#example-After textarea", "text"]
+	
+		in values["text"] one can find caught value.
+	
+	- **text**: retrieves the visible text of the first element node matching the selector. Last argument places caught value into "values" attribute under specified key
+	
+		> ["text", "div.Documentation-function:has(#After) p", "description"]
+	
+		in values["description"] one can find retrieved value.
+	
+	- **wait_visible**: waits until selector matched element is visible:
+
+		> ["wait_visible", "body footer"]
+
+	- **sleep**: waits specific duration (consisting of sequences of number and unit pairs, like "1.5h" or "1m". Valid time units are "ns", "us", "ms", "s", "m", "h")
+
+		> ["sleep", "3s"]
+
+	- **cookie**: sets the cookie, with arguments: cookie name, value, and optional domain. 
+				
+		> ["cookie", "key", "value", "example.com"]
 
 ### Optional
 

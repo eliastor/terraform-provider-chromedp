@@ -7,9 +7,12 @@ import (
 	"path/filepath"
 
 	"github.com/chromedp/chromedp"
+	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/diag"
+	"github.com/hashicorp/terraform-plugin-framework/path"
+	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 )
@@ -53,10 +56,37 @@ func (d *RecipeDataSource) Schema(ctx context.Context, req datasource.SchemaRequ
 				MarkdownDescription: `
 List of Actions. Each action is a list of arguments (strings).
 Supported actions:
-	- **navigate**: navigates the current frame.
-	- **click**:
-	- **value**:
-	- **text**:
+	- **navigate**: navigates the current frame to specific URL.
+	
+		> ["navigate", "https://github.com/eliastor/terraform-provider-chromedp"]
+	
+	- **click**: sends a mouse click event to the first element node matching the selector. Last argument "visible" waits for all queried elements are visible. 
+	
+		> ["click", "#example-After", "visible"]
+	
+	- **value**: gets value of form, input, textarea, select, or any other element with a ".value" field. Last argument places caught value into "values" attribute under specified key
+	
+		> ["value", "#example-After textarea", "text"]
+	
+		in values["text"] one can find caught value.
+	
+	- **text**: retrieves the visible text of the first element node matching the selector. Last argument places caught value into "values" attribute under specified key
+	
+		> ["text", "div.Documentation-function:has(#After) p", "description"]
+	
+		in values["description"] one can find retrieved value.
+	
+	- **wait_visible**: waits until selector matched element is visible:
+
+		> ["wait_visible", "body footer"]
+
+	- **sleep**: waits specific duration (consisting of sequences of number and unit pairs, like "1.5h" or "1m". Valid time units are "ns", "us", "ms", "s", "m", "h")
+
+		> ["sleep", "3s"]
+
+	- **cookie**: sets the cookie, with arguments: cookie name, value, and optional domain. 
+				
+		> ["cookie", "key", "value", "example.com"]
 
 				`,
 			},
@@ -77,6 +107,7 @@ Map of output values from **value** and **text** actions.`,
 			},
 			"screenshot_selector": schema.StringAttribute{
 				Optional:    true,
+				Validators:  []validator.String{stringvalidator.AlsoRequires(path.MatchRelative().AtParent().AtName("screenshot_filename"))},
 				Description: "Requires **screenshot_filename** to be set. Points frame to the selector before making the screenshot",
 			},
 		},
