@@ -1,0 +1,19 @@
+---
+page_title: "chromedp Provider"
+subcategory: ""
+description: |-
+  
+---
+
+# chromedp Provider
+
+This providers allows you to use [chromedp](https://github.com/chromedp/chromedp) in terraform in form of recipes.
+
+The easiest way to start using it is to install local Chrome or to create container with headless chrome, 
+for an instance: `podman run --rm -d -p 3000:3000 docker.io/browserless/chrome:latest`
+
+## Example Usage
+
+{{ tffile "examples/provider/provider.tf" }}
+
+{{ .SchemaMarkdown }}
