@@ -4,17 +4,28 @@ page_title: "chromedp_recipe Data Source - terraform-provider-chromedp"
 subcategory: ""
 description: |-
   Recipe runs list of action sequentially.
-          If "screenshot_filename" is set it makes the screenshot after all actions executed.
-          All the actions are list of string where the first string is action name.
-          In most cases the second string is selector for the action.
+  If "screenshot_filename" is set it makes the screenshot after all actions executed.
+  All actions are list of string where the first string is action name.
+  In most cases the second string is selector for the action.
+  The easiest way to get the selector for the element:
+  Open Devtools -> select element in DOM (or right click on the element at page and click "inspect element) -> right click on the element in dev tools: copy -> copy selector.
+  For more information about selectors https://en.wikipedia.org/wiki/CSS#Selector
 ---
 
 # chromedp_recipe (Data Source)
 
 Recipe runs list of action sequentially.
-		If "screenshot_filename" is set it makes the screenshot after all actions executed.
-		All the actions are list of string where the first string is action name.
-		In most cases the second string is selector for the action.
+If "screenshot_filename" is set it makes the screenshot after all actions executed.
+
+All actions are list of string where the first string is action name.
+
+In most cases the second string is selector for the action.
+
+The easiest way to get the selector for the element:
+
+Open Devtools -> select element in DOM (or right click on the element at page and click "inspect element) -> right click on the element in dev tools: copy -> copy selector.
+
+For more information about selectors https://en.wikipedia.org/wiki/CSS#Selector
 
 ## Example Usage
 

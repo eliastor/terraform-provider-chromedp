@@ -12,6 +12,12 @@ This providers allows you to use [chromedp](https://github.com/chromedp/chromedp
 The easiest way to start using it is to install local Chrome or to create container with headless chrome, 
 for an instance: `podman run --rm -d -p 3000:3000 docker.io/browserless/chrome:latest`
 
+The easiest way to get the selector for the element:
+
+Open Devtools -> select element in DOM (or right click on the element at page and click "inspect element) -> right click on the element in dev tools: copy -> copy selector.
+
+For more information about selectors https://en.wikipedia.org/wiki/CSS#Selector
+
 ## Example Usage
 
 {{ tffile "examples/provider/provider.tf" }}
