@@ -2,7 +2,6 @@
 
 This providers allows you to use [chromedp](https://github.com/chromedp/chromedp) in terraform in form of recipes.
 
-
 ## Requirements
 
 - [Terraform](https://www.terraform.io/downloads.html) >= 1.0
@@ -41,7 +40,6 @@ provider_installation {
 }
 ```
 
-
 To generate or update documentation, run `go generate` or `make doc-gen`.
 
 In order to run the full suite of Acceptance tests, run `make test`.
@@ -49,7 +47,6 @@ In order to run the full suite of Acceptance tests, run `make test`.
 ```shell
 make test
 ```
-
 
 ## Supported actions
 
@@ -61,9 +58,10 @@ make test
 - [x] Focus
 - [x] Cookies (setting cookies)
 - [x] Screenshots
-## Roadmap 
-- [ ] browserless.io support
-- [ ] Text
+
+## Roadmap
+
+- [ ] browserless.io support (untested, but should work)
 - [ ] Downloads
 - [ ] Uploads
 - [ ] Send keys
