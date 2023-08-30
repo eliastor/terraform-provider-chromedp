@@ -8,6 +8,7 @@ import (
 	"github.com/chromedp/cdproto/cdp"
 	"github.com/chromedp/cdproto/network"
 	"github.com/chromedp/chromedp"
+	"github.com/chromedp/chromedp/kb"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 )
 
@@ -124,6 +125,19 @@ func actionBuilder(actionArgs []types.String) (*Action, error) {
 			}
 			return nil
 		})
+	case "set_value":
+		if len(args) != 2 {
+			return nil, fmt.Errorf("set_value action expects 2 arguments (selector and value), got %d: %v", len(args), args)
+		}
+		selector := args[0].ValueString()
+		value := args[1].ValueString()
+		dpAction = chromedp.SetValue(selector, value)
+	case "press_enter":
+		if len(args) != 0 {
+			return nil, fmt.Errorf("press_enter action expects 0 arguments, got %d: %v", len(args), args)
+		}
+		selector := args[0].ValueString()
+		dpAction = chromedp.SendKeys(selector, kb.Enter)
 	default:
 		return nil, fmt.Errorf("unknown action: %s", verb)
 	}
