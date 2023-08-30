@@ -15,7 +15,8 @@ var (
 
 func chromedpCtxWithLocalChrome() ctxCreatorFunc {
 	return func(parentCtx context.Context) (context.Context, context.CancelFunc) {
-		return chromedp.NewContext(parentCtx)
+		ctx, _ := chromedp.NewExecAllocator(parentCtx, append(chromedp.DefaultExecAllocatorOptions[:], chromedp.Env("POWEREDBY=eliastor"))...)
+		return chromedp.NewContext(ctx)
 	}
 }
 

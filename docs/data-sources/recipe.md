@@ -65,6 +65,10 @@ Supported actions:
 		> ["value", "#example-After textarea", "text"]
 	
 		in values["text"] one can find caught value.
+
+	- **set_value**: sets value of form, input, textarea or any other element with a ".value" field.
+
+		> ["set_value", "#example-After textarea", "text"]. "text" will be set in the text area.
 	
 	- **text**: retrieves the visible text of the first element node matching the selector. Last argument places caught value into "values" attribute under specified key
 	

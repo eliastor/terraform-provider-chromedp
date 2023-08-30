@@ -58,10 +58,13 @@ make test
 - [x] Focus
 - [x] Cookies (setting cookies)
 - [x] Screenshots
+- [x] Text into fields
 
 ## Roadmap
 
 - [ ] browserless.io support (untested, but should work)
+- [ ] Attribute with cookie
+- [ ] Support of selects and other form elements
 - [ ] Downloads
 - [ ] Uploads
 - [ ] Send keys

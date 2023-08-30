@@ -21,6 +21,7 @@ func TestAccRecipeDataSource(t *testing.T) {
 
 					resource.TestCheckResourceAttr("data.chromedp_recipe.test", "actions.0.0", "navigate"),
 					resource.TestCheckResourceAttr("data.chromedp_recipe.test", "values.text", "package main\n\nimport (\n\t\"fmt\"\n\t\"time\"\n)\n\nvar c chan int\n\nfunc handle(int) {}\n\nfunc main() {\n\tselect {\n\tcase m := <-c:\n\t\thandle(m)\n\tcase <-time.After(10 * time.Second):\n\t\tfmt.Println(\"timed out\")\n\t}\n}\n"),
+					resource.TestCheckResourceAttr("data.chromedp_recipe.test", "values.runtext2", "hehe\n"),
 				),
 			},
 		},
@@ -28,6 +29,16 @@ func TestAccRecipeDataSource(t *testing.T) {
 }
 
 const testRecipeDataSourceConfig = `
+locals {
+	hehe_program=<<-EOT
+	package main
+	import "fmt"
+	func main() {
+		fmt.Println("hehe")
+	}	  
+	EOT
+}
+
 data "chromedp_recipe" "test" {
 	screenshot_filename = "test.png"
 	actions = [
@@ -40,6 +51,10 @@ data "chromedp_recipe" "test" {
 	  ["click", "#example-After div.Documentation-exampleButtonsContainer button.Documentation-exampleRunButton"],
 	  ["sleep", "3s"],
 	  ["text", "#example-After div.Documentation-exampleDetailsBody pre span.Documentation-exampleOutput", "runtext"],
+	  ["set_value", "#example-After div.Documentation-exampleDetailsBody textarea", local.hehe_program],
+	  ["click", "#example-After div.Documentation-exampleButtonsContainer button.Documentation-exampleRunButton"],
+	  ["sleep", "3s"],
+	  ["text", "#example-After div.Documentation-exampleDetailsBody pre span.Documentation-exampleOutput", "runtext2"],
 	]
   }
   output "test" {
