@@ -138,6 +138,13 @@ func actionBuilder(actionArgs []types.String) (*Action, error) {
 		}
 		selector := args[0].ValueString()
 		dpAction = chromedp.SendKeys(selector, kb.Enter)
+	case "send_keys":
+		if len(args) != 2 {
+			return nil, fmt.Errorf("send_keys action expects 2 arguments (selector and value), got %d: %v", len(args), args)
+		}
+		selector := args[0].ValueString()
+		value := args[1].ValueString()
+		dpAction = chromedp.SendKeys(selector, value)
 	default:
 		return nil, fmt.Errorf("unknown action: %s", verb)
 	}

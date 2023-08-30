@@ -51,7 +51,8 @@ data "chromedp_recipe" "test" {
 	  ["click", "#example-After div.Documentation-exampleButtonsContainer button.Documentation-exampleRunButton"],
 	  ["sleep", "3s"],
 	  ["text", "#example-After div.Documentation-exampleDetailsBody pre span.Documentation-exampleOutput", "runtext"],
-	  ["set_value", "#example-After div.Documentation-exampleDetailsBody textarea", local.hehe_program],
+	  ["set_value", "#example-After div.Documentation-exampleDetailsBody textarea", ""], # clear textarea
+	  ["send_keys", "#example-After div.Documentation-exampleDetailsBody textarea", local.hehe_program], # type our hee program
 	  ["click", "#example-After div.Documentation-exampleButtonsContainer button.Documentation-exampleRunButton"],
 	  ["sleep", "3s"],
 	  ["text", "#example-After div.Documentation-exampleDetailsBody pre span.Documentation-exampleOutput", "runtext2"],
