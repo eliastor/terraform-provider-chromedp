@@ -6,11 +6,6 @@ on:
       - "README.md"
       - "docs/**"
       - "examples/**"
-  push:
-    paths-ignore:
-      - "README.md"
-      - "docs/**"
-      - "examples/**"
 
 permissions:
   contents: read
